@@ -1,7 +1,7 @@
 package 윤다은;
 
 import java.io.*;
-	
+
 public class BOJ_11720_평균 {
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
