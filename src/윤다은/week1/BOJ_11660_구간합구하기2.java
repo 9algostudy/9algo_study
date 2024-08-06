@@ -1,4 +1,4 @@
-package 윤다은;
+package 윤다은.week1;
 
 import java.io.*;
 import java.util.StringTokenizer;
