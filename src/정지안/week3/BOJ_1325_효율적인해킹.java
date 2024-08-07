@@ -1,4 +1,4 @@
-package 정지안.week2;
+package 정지안.week3;
 
 import java.io.*;
 import java.util.*;
