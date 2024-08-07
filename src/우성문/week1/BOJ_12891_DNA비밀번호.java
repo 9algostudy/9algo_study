@@ -1,4 +1,4 @@
-package 우성문;
+package 우성문.week1;
 
 import java.io.*;
 import java.util.*;
