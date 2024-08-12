@@ -1,4 +1,4 @@
-package 박성욱;
+package 박성욱.week1;
 
 
 import java.io.BufferedReader;
