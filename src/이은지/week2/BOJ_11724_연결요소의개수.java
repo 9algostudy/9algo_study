@@ -42,10 +42,14 @@ public class BOJ_11724_연결요소의개수 {
 
     private static void dfs(int V) {
 
+        if (visited[V]) {
+            return;
+        }
+
         visited[V] = true;
 
         for (int i = 1; i <= N; i++) {
-            if (!visited[i] && graph[i][V] == 1) {
+            if (graph[i][V] == 1) {
                 dfs(i);
             }
         }
