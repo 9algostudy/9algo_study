@@ -21,10 +21,20 @@ public class BOJ_10158_개미 {
 		
 		int t = Integer.parseInt(br.readLine());
 		
-		int dx = 1;
-		int dy = 1;
+		p += t;
+		q += t;
 		
+		int a = p/w;
+		p %= w;
+		if (a % 2 == 1) {
+			p = w-p;
+		}
 		
+		a = q/h;
+		q %= h;
+		if (a%2 == 1) {
+			q = h-q;
+		}
 		
 		System.out.println(p + " " + q);
 	}
