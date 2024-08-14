@@ -42,6 +42,7 @@ public class BOJ_2178_미로탐색 {
 		visit = new boolean[n][m];
 
 		bfs(0,0);
+		//도착지점의 인덱스를 고려해 출력
 		System.out.println(arr[n - 1][m - 1]);
 
 //		mindist = Integer.MAX_VALUE;
