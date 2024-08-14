@@ -6,7 +6,7 @@ import java.util.*;
 public class BOJ_13023_ABCDE {
 	static HashMap<Integer, ArrayList<Integer>> graph = new HashMap<>();
 	static boolean[] check;
-	static int count;
+	static boolean flag;
 
 	public static void main(String[] args) throws Exception {
 		System.setIn(new FileInputStream("src/우성문/week2/input.txt"));
@@ -20,8 +20,6 @@ public class BOJ_13023_ABCDE {
 		int n = Integer.parseInt(line[0]);
 		int m = Integer.parseInt(line[1]);
 
-		
-
 		for (int i = 0; i < m; i++) {
 			line = br.readLine().trim().split(" ");
 			int a = Integer.parseInt(line[0]);
@@ -33,57 +31,40 @@ public class BOJ_13023_ABCDE {
 			bList.add(a);
 			graph.put(b, bList);
 		}
-		count = 0;
-		for(int i = 0;i<n;i++) {
-			if(!graph.containsKey(i)) {
+
+		flag = false;
+		for (int i = 0; i < n; i++) {
+			if (!graph.containsKey(i)) {
 				continue;
 			}
 			check = new boolean[n];
-			count=0;
-			dFS(i);
-			if(count==4) {
+			dFS(i, 0);
+			if(flag)
 				break;
-			}
 		}
-		sb.append(count==4?1:0);
+		sb.append(flag ? 1 : 0);
 		bw.write(sb.toString());
 		bw.flush();
 		bw.close();
 
 	}
 
-	static void dFS(int visit) {
-		if (check[visit]) {
+	static void dFS(int visit, int cnt) {
+		if (cnt==4) {
+			flag = true;
 			return;
 		}
-		count++;
 		check[visit] = true;
 		ArrayList<Integer> list = graph.get(visit);
 		if (list != null) {
 			for (int next : list) {
-				if (!check[next]) {
-					dFS(next);
-					break;
+				if(!check[next]) {
+					dFS(next, cnt + 1);
+					if(flag)
+						return;
 				}
 			}
 		}
-	}
-	
-	static void bFS(int visit) {
-		Queue<Integer> queue = new LinkedList<>();
-		queue.add(visit);
-		check[visit] = true;
-		while (!queue.isEmpty()) {
-			int next = queue.poll();
-			ArrayList<Integer> list = graph.get(next);
-			if (list != null) {
-				for (int room : list) {
-					if (!check[room]) {
-						check[room] = true;
-						queue.add(room);
-					}
-				}
-			}
-		}
+		check[visit] = false;
 	}
 }
