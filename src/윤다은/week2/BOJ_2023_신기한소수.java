@@ -22,6 +22,7 @@ public class BOJ_2023_신기한소수 {
 	static void dfs(int num, int depth) {
 		if (depth == N) {
 			System.out.println(num);
+			return;
 		}
 		
 		for (int i = 1; i <= 9; i+=2) {
