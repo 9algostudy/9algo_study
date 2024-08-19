@@ -34,7 +34,6 @@ public class BOJ_14502_연구실 {
 		}
 		cleanCnt -= 3;		
 		dfs(0);
-		
 		System.out.println(cleanCnt-min);
 	}
 
