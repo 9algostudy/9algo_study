@@ -13,24 +13,25 @@ import java.util.*;
 public class BOJ_1260_DFS와BFS {
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     static BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-    static Edge[] edgeList;
-    static Edge[] edgeListForBfs;//복제 엣지리스트생성(bfs용. 왜냐하면 dfs수행시 기존 edgeList의 pq가 poll돼서 데이터가 변경됨.)
-    static boolean[] visited;
+    static Edge[] edgeList;// dfs용 엣지리스트
+    static Edge[] edgeListForBfs;//bfs용 엣지리스트
+    static boolean[] visited; //방문 배열
 
     // 다음 도착노드를 저장하는 클래스
     static class Edge{
-        PriorityQueue<Integer> pq = new PriorityQueue<>();
+        PriorityQueue<Integer> pq = new PriorityQueue<>(); // 다음노드를 저장하는 큐
 
-        public void addNode(int node){
-            pq.offer(node);// 다음 노드는 오름차순으로 정렬된다.
+        public void addNode(int node) {
+            pq.offer(node);// 순서대로 저장한다.
         }
     }
 
     public static void main(String[] args) throws IOException {
         StringTokenizer st = new StringTokenizer(br.readLine());
-        int n = Integer.parseInt(st.nextToken());
-        int m = Integer.parseInt(st.nextToken());
-        int v = Integer.parseInt(st.nextToken());
+        // 0. 입력값 초기화
+        int n = Integer.parseInt(st.nextToken()); // 정점의 개수
+        int m = Integer.parseInt(st.nextToken()); // 간선의 개수
+        int v = Integer.parseInt(st.nextToken()); // 시작할 정점의 개수
 
         // 1. 출발지 노드번호에 접근할 수 있는 리스트
         edgeList = new Edge[n+1];
@@ -43,13 +44,13 @@ public class BOJ_1260_DFS와BFS {
             edgeListForBfs[i] = new Edge();
         }
 
-        // 3. 도착지노드를 넣어준다.
+        // 3. 그래프 초기화
         for(int i=0; i<m; i++){
             st = new StringTokenizer(br.readLine());
-            int startNode = Integer.parseInt(st.nextToken());
-            int nextNode = Integer.parseInt(st.nextToken());
+            int startNode = Integer.parseInt(st.nextToken()); // 시작노드
+            int nextNode = Integer.parseInt(st.nextToken()); // 끝노드
 
-            //양방향관계
+            //양방향관계 설정
             edgeList[startNode].addNode(nextNode);
             edgeList[nextNode].addNode(startNode);
             edgeListForBfs[startNode].addNode(nextNode);
@@ -73,6 +74,7 @@ public class BOJ_1260_DFS와BFS {
 
     }
 
+    // BFS
     private static StringBuilder bfs(int start, StringBuilder sb) {
 
         Queue<Integer> queue = new LinkedList<>();
@@ -90,9 +92,9 @@ public class BOJ_1260_DFS와BFS {
                 int nextNode = nextNodePq.poll();
 
                 if(!visited[nextNode]){//방문하지않았다면 큐에 저장
-                    queue.offer(nextNode);
-                    //다음위치 방문 처리
-                    visited[nextNode] = true;
+                    visited[nextNode] = true; //다음위치 방문 처리
+                    queue.offer(nextNode); // queue에 다음 노드 삽입
+
                 }
             }//while - pq
         }//while - queue
@@ -100,6 +102,8 @@ public class BOJ_1260_DFS와BFS {
         return sb;
     }//bfs
 
+
+    // DFS
     private static StringBuilder dfs(int start, StringBuilder sb) {
         visited[start] = true;//현재 위치 방문 처리
         //방문한 위치를 sb에 담는다.
