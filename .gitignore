@@ -1,5 +1,22 @@
-.project
+### IDE 설정 파일 ###
+
+# Eclipse
 .classpath
-.idea
+.project
+.settings/
+bin/
+
+# IntelliJ IDEA
+.idea/
 *.iml
-out
+*.iws
+
+### 빌드 아티팩트 ###
+build/
+out/
+target/
+
+### 운영체제 및 기타 ###
+.DS_Store
+Thumbs.db
+*.log
