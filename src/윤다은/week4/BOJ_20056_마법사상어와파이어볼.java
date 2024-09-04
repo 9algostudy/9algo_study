@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.LinkedList;
 import java.util.Queue;
-
+//dsfalksjfa;sldfkj
 public class BOJ_20056_마법사상어와파이어볼 {
 	
 	static final int mass = 0;
