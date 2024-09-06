@@ -10,7 +10,7 @@ import java.util.StringTokenizer;
 public class BOJ_20056_마법사상어와파이어볼 {
 
     static class Fireball {
-        int r, c, m, s, d;
+        int r, c, m, s, d; // 위치, 질량, 방향, 속력
 
         public Fireball(int r, int c, int m, int s, int d) {
             this.r = r;
@@ -21,7 +21,7 @@ public class BOJ_20056_마법사상어와파이어볼 {
         }
     }
 
-    static int N, M, K, result;
+    static int N, M, K, result; // N*N, 파이어볼 M개, 명령 K번, 결과값
     static ArrayList<Fireball>[][] arr;
     static ArrayList<Fireball> balls;
     static int[] dx = {-1, -1, 0, 1, 1, 1, 0, -1};
@@ -37,11 +37,6 @@ public class BOJ_20056_마법사상어와파이어볼 {
 
         balls = new ArrayList<>();
         arr = new ArrayList[N][N];
-        for (int i = 0; i < N; i++) {
-            for (int j = 0; j < N; j++) {
-                arr[i][j] = new ArrayList<>();
-            }
-        }
 
         for (int i = 0; i < M; i++) {
             st = new StringTokenizer(br.readLine());
@@ -80,7 +75,7 @@ public class BOJ_20056_마법사상어와파이어볼 {
         for (Fireball ball : balls) {
 
             int x = (ball.r + N + dx[ball.d] * (ball.s % N)) % N;
-            int y = (ball.c + N + dy[ball.d] * (ball.s % N)) % N; // +N은 음수 때문
+            int y = (ball.c + N + dy[ball.d] * (ball.s % N)) % N; // +N은 음수 때문, balls.s % N 을 해주지 않으면 N을 더해도 음수가 나올 수 있음..
 
             ball.r = x;
             ball.c = y;
@@ -92,7 +87,7 @@ public class BOJ_20056_마법사상어와파이어볼 {
     private static void combination() {
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < N; j++) {
-                if (arr[i][j].size() < 2) {
+                if (arr[i][j].size() < 2) { // 2개 미만이면 그냥 통과
                     continue;
                 }
 
