@@ -3,121 +3,106 @@ package 윤다은.week4;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
-//dsfalksjfa;sldfkj
+
 public class BOJ_20056_마법사상어와파이어볼 {
 	
-	static final int mass = 0;
-	static final int speed = 1;
-	static final int direction = 2;
-	static final int cnt = 3;
-	static final int same = 4;
+	static class fireball {
+		int x;
+		int y;
+		int m;
+		int s;
+		int d;
+		
+		public fireball(int x, int y, int m, int s, int d) {
+			super();
+			this.x = x;
+			this.y = y;
+			this.m = m;
+			this.s = s;
+			this.d = d;
+		}
+	}
 	
-	static int dir[][] = {{-1, 0}, {-1, 1}, {0, 1}, {1, 1}, {1, 0}, {1, -1}, {0, -1}, {-1, -1}};
-	static int[][][] map;
-	static int N;
-
+	static int N, M, K;
+	static ArrayList<fireball> balls = new ArrayList<>();
+	static ArrayList<fireball>[][] map;
+	static int[][] d = {{-1, 0}, {-1, 1}, {0, 1}, {1, 1}, {1, 0}, {1, -1}, {0, -1}, {-1, -1}};
+	
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		
 		String[] s = br.readLine().split(" ");
-		
 		N = Integer.parseInt(s[0]);
-		int M = Integer.parseInt(s[1]);
-		int K = Integer.parseInt(s[2]);
+		M = Integer.parseInt(s[1]);
+		K = Integer.parseInt(s[2]);
 		
-		map = new int[N][N][5];
-		Queue<int[]> queue = new LinkedList<int[]>();
-		
-		int r, c;
 		for (int i = 0; i < M; i++) {
 			s = br.readLine().split(" ");
-			r = Integer.parseInt(s[0])-1;
-			c = Integer.parseInt(s[1])-1;
-			map[r][c][mass] = Integer.parseInt(s[2]);
-			map[r][c][speed] = Integer.parseInt(s[3]);
-			map[r][c][direction] = Integer.parseInt(s[4]);
-			map[r][c][cnt] = 1;
-			map[r][c][same] = 1;
+			balls.add(new fireball(Integer.parseInt(s[0])-1, Integer.parseInt(s[1])-1, Integer.parseInt(s[2]), Integer.parseInt(s[3]), Integer.parseInt(s[4])));
 		}
 		
-		while (K-- > 0) {
+		for (int i = 0; i < K; i++) {
+			move();
+		}
+		
+		int res = 0;
+		for (fireball fb : balls) res += fb.m;
+		
+		System.out.println(res);
+	}
+	
+	public static void move() {
+		map = new ArrayList[N][N];
+		for (int i = 0; i < N; i++) {
+			for (int j = 0; j < N; j++) {
+				map[i][j] = new ArrayList<>();
+			}
+		}
+		
+		for (fireball fb : balls) {
+			int x = (fb.x + d[fb.d][0]*fb.s)%N;
+			if (x < 0) x += N;
+			int y = (fb.y + d[fb.d][1]*fb.s)%N;
+			if (y < 0) y += N;
 			
-			for (int i = 0; i < N; i++) {
-				for (int j = 0; j < N; j++) {
-					if (map[i][j][cnt] > 1) {
-						int count = map[i][j][cnt];
-						if (map[i][j][mass]/5 == 0) {
-							map[i][j][cnt] = 0;
-							continue;
+			fb.x = x;
+			fb.y = y;
+			
+			map[x][y].add(fb);
+		}
+		
+		for (int i = 0; i < N; i++) {
+			for (int j = 0; j < N; j++) {
+				if (map[i][j].size() > 1) {
+					int m = 0;
+					int s = 0;
+					boolean even = false, odd = false;
+					for (fireball fb : map[i][j]) {
+						m += fb.m;
+						s += fb.s;
+						if (fb.d%2 == 0) even = true;
+						else odd = true;
+						balls.remove(fb);
+					}
+					
+					m /= 5;
+					if (m == 0) continue;
+					s /= map[i][j].size();
+					
+					if (even && odd) {
+						for (int k = 1; k < 8; k+=2) {
+							balls.add(new fireball(i, j, m, s, k));
 						}
-						if (map[i][j][same] == 0) {
-							for (int k = 0; k < 8; k+=2) {
-								int[] tmp = {i, j, map[i][j][mass]/5, map[i][j][speed]/count, k, count, map[i][j][same]};
-								queue.offer(tmp);
-							}
-						} else {
-							for (int k = 1; k < 8; k += 2) {
-								int[] tmp = {i, j, map[i][j][mass]/5, map[i][j][speed]/count, k, count, map[i][j][same]};
-								queue.offer(tmp);
-							}
+					} else {
+						for (int k = 0; k < 7; k+=2) {
+							balls.add(new fireball(i, j, m, s, k));
 						}
-						map[i][j][cnt] -= count;
-						map[i][j][mass]=0;
-						map[i][j][speed]=0;
-					} else if (map[i][j][cnt] == 1) {
-						int[] tmp = {i, j, map[i][j][mass], map[i][j][speed], map[i][j][direction], 1, map[i][j][same]};
-						queue.offer(tmp);
-						map[i][j][cnt]--;
-						map[i][j][mass]=0;
-						map[i][j][speed]=0;
 					}
 				}
 			}
-			
-			while (!queue.isEmpty()) {
-				int[] tmp = queue.poll();
-				move(tmp[0], tmp[1], tmp[2], tmp[3], tmp[4], tmp[5], tmp[6]);
-			}
 		}
-		
-		int sum = 0;
-		for (int i = 0; i < N; i++) {
-			for (int j = 0; j < N; j++) {
-				if (map[i][j][cnt] > 1) {
-					sum += map[i][j][mass]/5;
-				}
-				else if (map[i][j][cnt] == 1) {
-					sum += map[i][j][mass];
-				}
-			}
-		}
-		
-		System.out.println(sum);
 	}
-	
-	public static void move(int i, int j, int ma, int sp, int d, int count, int sa) {
-		int newr = (i + dir[d][0]*sp/count)%N;
-		int newc = (j + dir[d][1]*sp/count)%N;
-
-		map[newr][newc][cnt]++;
-		
-		if (count > 0) {
-			if (sa == 0) {
-				if (d%2 != map[newr][newc][direction]%2) {
-					map[newr][newc][same] = 1;
-				}
-			}
-			map[newr][newc][speed] += sp/count;
-			map[newr][newc][mass] += ma/5;
-		} else {
-			map[newr][newc][mass] = ma;
-			map[newr][newc][speed] = sp/count;
-			map[newr][newc][direction] = d;
-			map[newr][newc][same] = 0;
-		}
-		
-	}
-
 }
