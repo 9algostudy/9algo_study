@@ -3,6 +3,8 @@ package 윤다은.week4;
 import java.io.*;
 import java.util.*;
 
+import 윤다은.week4.BOJ_1753_최단경로.edge;
+
 public class BOJ_1753_최단경로 {
 	static final int INF = Integer.MAX_VALUE;
 	
@@ -45,8 +47,8 @@ public class BOJ_1753_최단경로 {
 		Arrays.fill(min, INF);
 		min[start] = 0;
 		
-		PriorityQueue<edge> find = new PriorityQueue();
-		int len = list[start].size();
+		PriorityQueue<edge> find = new PriorityQueue<edge>();
+		int len;
 		edge t = new edge(start, 0);
 		find.offer(t);
 		
@@ -59,7 +61,7 @@ public class BOJ_1753_최단경로 {
 				
 				if (min[next.v]>min[tmp.v]+next.w) {
 					min[next.v] = min[tmp.v]+next.w;
-					//이거 그냥 find.offer(next) 하면 시간초과남
+					//이거 그냥 find.offer(next) 하면 시간초과남 당연하지 바보야 안틀린게 더 이상하다
 					find.offer(new edge(next.v, min[next.v]));
 				}
 			}

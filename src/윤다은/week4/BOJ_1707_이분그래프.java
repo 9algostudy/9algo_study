@@ -43,6 +43,7 @@ public class BOJ_1707_이분그래프 {
 			
 			
 			res = "YES";
+			//그래프가 전부 연결되어있지 않은 경우를 위해 for문 돌리기
 			for (int i = 1; i <= V; i++) {
 				if (team[i] == 0) {
 					team[i] = twoteams[0];
