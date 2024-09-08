@@ -4,6 +4,7 @@
 .classpath
 .project
 .settings/
+.class
 bin/
 
 # IntelliJ IDEA
