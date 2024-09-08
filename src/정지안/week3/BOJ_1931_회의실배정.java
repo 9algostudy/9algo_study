@@ -73,7 +73,7 @@ import java.util.StringTokenizer;
 // ============ 문제 접근 ============
 // (오답)회의 시간이 가장 짧은것 순서대로 채워나가면 정답일것같은데
 // => 회의 끝시간이 빨리끝나는것부터 처리. 똑같이 빨리끝난다면 빨리시작하는것부터.
-public class Main {
+public class BOJ_1931_회의실배정 {
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     static BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
     static int[]arr;
