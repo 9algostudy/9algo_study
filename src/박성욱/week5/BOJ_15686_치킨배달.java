@@ -40,12 +40,6 @@ public class BOJ_15686_치킨배달 {
 				}
 			}
 		}
-		int res = 0;
-		
-		for(int x : resarr) {
-			System.out.print(x + " ");
-		}
-		System.out.println();
 		
 	}
 	private static void bfs(int i, int j) {
