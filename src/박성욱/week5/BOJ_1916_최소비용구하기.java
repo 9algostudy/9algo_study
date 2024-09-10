@@ -41,16 +41,20 @@ public class BOJ_1916_최소비용구하기 {
 		
 		//시작점의 거리 배열 0으로 수정
 		d[start] = 0;
-		dik(start);
+		dik(start,end);
 		System.out.println(d[end]);
 	}
-	private static void dik(int start) {
+	private static void dik(int start,int end) {
 		//처음 큐에 넣기
 		pq.add(new Node(start,0));
 		while(!pq.isEmpty()) {
 			//노드 꺼내기
 			Node nownode = pq.poll();
 			int now = nownode.t;
+			//가지치기
+            if(now == end){
+                break;
+            }
 			//방문 체크
 			if(!visit[now]) {
 				visit[now] = true;
