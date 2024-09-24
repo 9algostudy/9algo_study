@@ -17,10 +17,13 @@ public class BOJ_14501_퇴사 {
 			p[i] = Integer.parseInt(tp[1]);
 		}
 		for (int i = 0; i < n; i++) {
+			//날짜가 n을 넘어갈경우 체크
 			int day = i + t[i];
 			if (day <= n) {
+				//지금 이익 vs 기존 이익 + 얻을 이익
 				dp[day] = Math.max(dp[day], dp[i] + p[i]);
 			}
+			//지금까지의 최대 이익 계산
 			dp[i + 1] = Math.max(dp[i + 1], dp[i]);
 		}
 		System.out.println(dp[n]);
