@@ -11,7 +11,7 @@ public class BOJ_2342_DDR{
 		
 		String[] s = br.readLine().split(" ");
 		
-		int len = s.length;
+		int len = s.length-1;
 		int[][][] dp = new int[len][5][5];
 		
 		for (int i = 0; i < 5; i++)
@@ -20,7 +20,7 @@ public class BOJ_2342_DDR{
 		dp[0][0][step] = 2;
 		dp[0][step][0] = 2;
 		
-		for (int i = 1; i < len-1; i++) {
+		for (int i = 1; i < len; i++) {
 			for (int j = 0; j < 5; j++)
 				Arrays.fill(dp[i][j], 1000000);
 			
@@ -49,7 +49,7 @@ public class BOJ_2342_DDR{
 		int res = 1000000;
 		for (int i = 0; i < 5; i++) {
 			for (int j = 0; j < 5; j++) {
-				res = Math.min(res, dp[len-2][i][j]);
+				res = Math.min(res, dp[len-1][i][j]);
 			}
 		}
 		
