@@ -1,5 +1,4 @@
 package 박성욱.week6;
-
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
