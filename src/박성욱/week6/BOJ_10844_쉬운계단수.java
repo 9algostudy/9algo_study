@@ -39,4 +39,3 @@ public class BOJ_10844_쉬운계단수{
     }
 }
 
-
