@@ -11,6 +11,7 @@ import java.util.StringTokenizer;
 public class BOJ_16234_인구이동 {
 
     static int N, L, R, result;
+    
     static boolean[][] visited;
     static int[][] arr;
     static int[] dx = {0, 1, -1, 0};
