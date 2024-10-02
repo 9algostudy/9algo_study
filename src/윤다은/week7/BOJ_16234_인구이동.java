@@ -52,8 +52,8 @@ public class BOJ_16234_인구이동 {
 				}
 			}
 			
-			Queue<Integer> queue = new LinkedList<Integer>();
 			if (!stop) {
+				Queue<Integer> queue = new LinkedList<Integer>();
 				int[][] visited = new int[N][N];
 				for (int i = 0;  i < N; i++) {
 					for (int j = 0; j < N; j++) {
