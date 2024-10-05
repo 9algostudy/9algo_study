@@ -1,4 +1,4 @@
-package 윤다은.week7;
+package 박성욱.week7;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
