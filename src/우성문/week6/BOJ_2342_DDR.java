@@ -55,7 +55,7 @@ public class BOJ_2342_DDR{
 				for(int i = idx;i<n;i++) {
 					for(int j=1;j<5;j++) {
 						if(dp[idx-1][j]==null) continue;
-						dp[idx][nums[idx]]
+//						dp[idx][nums[idx]]
 					}
 				}
 				
