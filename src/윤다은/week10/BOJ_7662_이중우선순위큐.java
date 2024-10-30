@@ -38,7 +38,7 @@ public class BOJ_7662_이중우선순위큐 {
 
 				if (s[0].equals("I")) {
 						hm.put(n, hm.getOrDefault(n, 0) + 1);
-						maxq.offer(n);
+						maxq.offer(n);			//넣을 땐 무조건 다 넣어준다
 						minq.offer(n);
 				} else {
 					if (hm.size() == 0)
@@ -46,14 +46,14 @@ public class BOJ_7662_이중우선순위큐 {
 					if (n == 1) {
 						int a;
 						while (true) {
-							a = maxq.poll();
-							int b = hm.getOrDefault(a, 0);
-							if (b == 0)
+							a = maxq.poll();				//뺄 때는 maxq만 빼준다
+							int b = hm.getOrDefault(a, 0);	//맵에 저장돼있는 값 가져오기
+							if (b == 0)						//저장돼있는 값 없으면 다시 maxq에서 빼준다
 								continue;
 							if (b == 1) {
-								hm.remove(a);
+								hm.remove(a);				//있는데 1이었으면 맵에서 제거
 							} else {
-								hm.put(a, b - 1);
+								hm.put(a, b - 1);			//아니면 맵 값에 -1 해주기
 							}
 							break;
 						}
@@ -74,11 +74,11 @@ public class BOJ_7662_이중우선순위큐 {
 					}
 				}
 			}
-			if (hm.size() == 0) {
+			if (hm.size() == 0) {					//맵이 비어있으면 EMPTY 출력
 				System.out.println("EMPTY");
 			} else {
 				int max=0, min=0;
-				while (true) {
+				while (true) {						//맵에 존재하는 값이 나올때까지 꺼내기
 					max = maxq.poll();
 					if (hm.getOrDefault(max, 0) == 0) continue;
 					break;
