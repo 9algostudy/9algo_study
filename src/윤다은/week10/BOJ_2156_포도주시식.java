@@ -10,19 +10,26 @@ public class BOJ_2156_포도주시식 {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		
 		int N = Integer.parseInt(br.readLine());
-		int[] dp1 = new int[N];
-		int[] dp2 = new int[N];
 		
-		dp1[0] = Integer.parseInt(br.readLine());
-		dp1[1] = Integer.parseInt(br.readLine());
-		dp2[1] = dp1[0];
-		int a;
-		for (int i = 2; i < N; i++) {
-			a = Integer.parseInt(br.readLine());
-			dp1[i] = Math.max(dp2[i-1], dp2[i-2]) + a;
-			dp2[i] = dp1[i-1];
+		int[] arr = new int[N+1];
+		for (int i = 1; i <= N; i++) {
+			arr[i] = Integer.parseInt(br.readLine());
 		}
 		
-		System.out.println(Math.max(dp1[N-1], dp2[N-1]));
+		int[] dp = new int[N+1];
+		
+		dp[1] = arr[1];
+		
+		if (N == 1) {
+			System.out.println(dp[1]);
+			return;
+		}
+		dp[2] = arr[1] + arr[2];
+		
+		for (int i = 3; i <= N; i++) {
+			dp[i] = Math.max(dp[i-2] + arr[i], Math.max(dp[i-3]+arr[i-1]+arr[i], dp[i-1]));
+		}
+		
+		System.out.println(dp[N]);
 	}
 }
