@@ -1,10 +1,10 @@
 package 이은지.week15;
 
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
-
 
 public class BOJ_1890_점프 {
 	static int N;
@@ -49,4 +49,5 @@ public class BOJ_1890_점프 {
 
 		System.out.println(count[N - 1][N - 1]);
 	}
+
 }
