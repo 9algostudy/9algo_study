@@ -23,7 +23,7 @@ public class BOJ_14938_서강그라운드 {
 
 		@Override
 		public int compareTo(Road o) {
-			return o.distance - this.distance;
+			return this.distance - o.distance;
 		}
 	}
 
